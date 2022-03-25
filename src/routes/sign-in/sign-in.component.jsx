@@ -5,10 +5,10 @@ const SignIn = () => {
 
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
-    createUserDocumentFromAuth(user)
+    const userDocRef = await createUserDocumentFromAuth(user)
   }
 
-  return (
+  return (  
     <div>
       <h1> SignINNN</h1>
       <button onClick={logGoogleUser}>Sign In with Google Popup</button>
