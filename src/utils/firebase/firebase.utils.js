@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { 
   getAuth, 
-  signInWithRedirect, 
+  //signInWithRedirect, 
   signInWithPopup, 
   GoogleAuthProvider 
 } from 'firebase/auth'
@@ -28,6 +28,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig); 
 
+//providers are Google, facebook and so on 
 const provider = new GoogleAuthProvider();
 
 //you can have multiple providers; 
@@ -40,7 +41,8 @@ provider.setCustomParameters({
 //auth should always be ONE for the duration of use of this website. 
 //You want the user to auth only once when using the website.
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider); 
+// export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 export const db = getFirestore(); 
 
