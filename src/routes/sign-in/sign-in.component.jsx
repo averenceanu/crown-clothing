@@ -7,6 +7,7 @@ import {
   createUserDocumentFromAuth
  } from '../../utils/firebase/firebase.utils'
 
+ import SignUpForm from '../../components/sign-up-form/sign-up-form.component'
 
 const SignIn = () => {
   // //useEffect will run once on mount
@@ -32,6 +33,7 @@ const SignIn = () => {
       <h1> SignINNN</h1>
       <button onClick={logGoogleUser}>Sign In with Google Popup</button>
       {/* <button onClick={signInWithGoogleRedirect }>Sign In with Google Redirect</button> */}
+      <SignUpForm /> 
     </div>
   )
 }
