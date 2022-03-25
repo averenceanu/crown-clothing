@@ -6,6 +6,14 @@ import {
   signInWithPopup, 
   GoogleAuthProvider 
 } from 'firebase/auth'
+import { 
+  getFirestore,
+  doc, 
+  getDoc,
+  setDoc,
+} from 'firebase/firestore'
+// NOTES: getDoc and setDoc => getting the doc data and setting the doc data  
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -33,3 +41,10 @@ provider.setCustomParameters({
 //You want the user to auth only once when using the website.
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+
+export const db = getFirestore(); 
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+  const userDocRef = doc(db, 'users', userAuth.uid);
+  console.log("USERDOC", userDocRef);
+}
