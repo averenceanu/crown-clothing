@@ -1,15 +1,17 @@
 // import { useEffect } from 'react';
 // import { getRedirectResult } from 'firebase/auth';
-import { 
-  //auth,
-  signInWithGooglePopup, 
-  // signInWithGoogleRedirect,
-  createUserDocumentFromAuth
- } from '../../utils/firebase/firebase.utils'
+// import { 
+//   //auth,
+//   signInWithGooglePopup, 
+//   // signInWithGoogleRedirect,
+//   createUserDocumentFromAuth
+//  } from '../../utils/firebase/firebase.utils'
 
- import SignUpForm from '../../components/sign-up-form/sign-up-form.component'
+import SignUpForm from '../../components/sign-up-form/sign-up-form.component';
+import SignInForm from '../../components/sign-in-form/sign-in-form.component';
+import './authentication.styles.scss';
 
-const SignIn = () => {
+const Authentication = () => {
   // //useEffect will run once on mount
   // //use this method because with redirect to another page, the current 
   // //website doesn't keep track of previously state of the website and it will re-render causing
@@ -23,19 +25,19 @@ const SignIn = () => {
   //   }
   // })
 
-  const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user)
-  }
+  // const logGoogleUser = async () => {
+  //   const { user } = await signInWithGooglePopup();
+  //   const userDocRef = await createUserDocumentFromAuth(user)
+  // }
 
   return (  
-    <div>
-      <h1> SignINNN</h1>
-      <button onClick={logGoogleUser}>Sign In with Google Popup</button>
+    <div className="authentication-container">
+      {/* <button onClick={logGoogleUser}>Sign In with Google Popup</button> */}
       {/* <button onClick={signInWithGoogleRedirect }>Sign In with Google Redirect</button> */}
+      <SignInForm />
       <SignUpForm /> 
     </div>
   )
 }
 
-export default SignIn;
+export default Authentication;
