@@ -7,17 +7,18 @@ import { UserContext } from '../../context/user.context';
 const Navigation = () => {
 
   const { currentUser} = useContext(UserContext)
-  console.log(currentUser)
-
+ 
   return (
     <Fragment>
       <div className='navigation'>
-      <Link to='/' className='logo-container'>
-        <CrwnLogo />
-      </Link>
-      <div className='nav-links-container'></div>
-          <Link className='nav-link' to='/shop'> SHOP </Link>
-          <Link className='nav-link' to='/sign-in'> SIGN IN </Link>
+        <Link to='/' className='logo-container'><CrwnLogo /></Link>
+        <div className='nav-links-container'>
+            <Link className='nav-link' to='/shop'> SHOP </Link>
+            { currentUser ? 
+              (<Link className='nav-link' to='/sign-in'> SIGN OUT </Link>) : 
+              (<Link className='nav-link' to='/sign-in'> SIGN IN </Link>) 
+            }
+        </div>
       </div>
       <Outlet />
     </Fragment>
