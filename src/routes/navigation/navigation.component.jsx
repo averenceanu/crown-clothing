@@ -4,6 +4,7 @@ import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import './navigation.styles.scss';
 import { UserContext } from '../../context/user.context';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
+import CartIcon from '../../components/cart-icon/cart-icon.component';
 
 const Navigation = () => {
 
@@ -18,11 +19,12 @@ const Navigation = () => {
       <div className='navigation'>
         <Link to='/' className='logo-container'><CrwnLogo /></Link>
         <div className='nav-links-container'>
-            <Link className='nav-link' to='/shop'> SHOP </Link>
-            { currentUser ? 
-              (<span className='nav-link' onClick={singOutHandler}>SIGN OUT</span>) : 
-              (<Link className='nav-link' to='/sign-in'> SIGN IN </Link>) 
-            }
+          <Link className='nav-link' to='/shop'> SHOP </Link>
+          { currentUser ? 
+            (<span className='nav-link' onClick={singOutHandler}>SIGN OUT</span>) : 
+            (<Link className='nav-link' to='/sign-in'> SIGN IN </Link>) 
+          }
+          <CartIcon />
         </div>
       </div>
       <Outlet />
