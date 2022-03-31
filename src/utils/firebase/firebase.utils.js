@@ -15,6 +15,8 @@ import {
   doc, 
   getDoc,
   setDoc,
+  collection, 
+  writeBatch,
 } from 'firebase/firestore'
 // NOTES: getDoc and setDoc => getting the doc data and setting the doc data  
 
@@ -49,6 +51,19 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 // export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 export const db = getFirestore(); 
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase())
+    batch.set(docRef, object);
+  })
+
+  await batch.commit();
+  console.log('done');
+}
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
   const userDocRef = doc(db, 'users', userAuth.uid); //connect to db and get user's uid
