@@ -1,5 +1,4 @@
-import { useContext  } from 'react';
-import { CartContext } from '../../context/card.context'; 
+import { useSelector, useDispatch } from "react-redux";
 import {
   CheckoutItemContainer,
   ImageContainer,
@@ -7,19 +6,27 @@ import {
   Quantity,
   Arrow,
   Value,
-  RemoveButton
-} from './checkout-item.styles';
+  RemoveButton,
+} from "./checkout-item.styles";
+import { selectCartItems } from "../../store/cart/cart.selector";
+import {
+  addItemToCart,
+  clearItemFromCart,
+  removeItemFromCart,
+} from "../../store/cart/cart.action";
 
-const CheckoutItem = ({cartItem}) => {
+const CheckoutItem = ({ cartItem }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
 
-  const {clearItemFromCart, addItemToCart, removeItemFromCart } = useContext(CartContext)
+  const { name, price, imageUrl, quantity } = cartItem;
 
-  const {name, price, imageUrl, quantity} = cartItem;
+  const clearItemHandle = () =>
+    dispatch(clearItemFromCart(cartItems, cartItem));
+  const addItemHandle = () => dispatch(addItemToCart(cartItems, cartItem));
+  const removeItemHandle = () =>
+    dispatch(removeItemFromCart(cartItems, cartItem));
 
-  const clearItemHandle= () => clearItemFromCart(cartItem);
-  const addItemHandle= () => addItemToCart(cartItem);
-  const removeItemHandle= () => removeItemFromCart(cartItem);
-  
   return (
     <CheckoutItemContainer>
       <ImageContainer>
@@ -28,13 +35,15 @@ const CheckoutItem = ({cartItem}) => {
       <BaseSpan>{name}</BaseSpan>
       <Quantity>
         <Arrow onClick={removeItemHandle}>&#10094;</Arrow>
-        <Value className='value'>{quantity}</Value>
-        <Arrow className='arrow' onClick={addItemHandle}>&#10095;</Arrow>
+        <Value className="value">{quantity}</Value>
+        <Arrow className="arrow" onClick={addItemHandle}>
+          &#10095;
+        </Arrow>
       </Quantity>
       <BaseSpan>{price}</BaseSpan>
       <RemoveButton onClick={clearItemHandle}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
-  )
-}
+  );
+};
 
 export default CheckoutItem;
