@@ -2,7 +2,7 @@
 //the business login is found in the selector file.
 
 import { createSelector } from "reselect";
-//memonisation: cash the previous value, so that the value did not update you show it
+//memonization: cash the previous value, so that the value did not update you show it
 
 const selectCategoryReducer = (state) => state.categories;
 
