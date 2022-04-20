@@ -2,9 +2,11 @@
 //the business login is found in the selector file.
 
 import { createSelector } from "reselect";
+import { CategoriesState } from "./category.reducer";
+import { CategoryMap } from "./category.types";
 //memonization: cash the previous value, so that the value did not update you show it
 
-const selectCategoryReducer = (state) => state.categories;
+const selectCategoryReducer = (state): CategoriesState => state.categories;
 
 export const selectCategories = createSelector(
   //if a change occured in the selectCategoryReducer > then perform the arrow function
@@ -15,10 +17,10 @@ export const selectCategories = createSelector(
 //don't re-run unless the selectCategories has not change. Return back the prev. value
 export const selectCategoriesMap = createSelector(
   [selectCategories],
-  (categories) =>
+  (categories): CategoryMap =>
     categories.reduce((acc, category) => {
       const { title, items } = category;
       acc[title.toLowerCase()] = items;
       return acc;
-    }, {})
+    }, {} as CategoryMap)
 );
