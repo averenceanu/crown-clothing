@@ -6,7 +6,7 @@ import { CategoriesState } from "./category.reducer";
 import { CategoryMap } from "./category.types";
 //memonization: cash the previous value, so that the value did not update you show it
 
-const selectCategoryReducer = (state): CategoriesState => state.categories;
+const selectCategoryReducer = (state: any): CategoriesState => state.categories;
 
 export const selectCategories = createSelector(
   //if a change occured in the selectCategoryReducer > then perform the arrow function
