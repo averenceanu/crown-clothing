@@ -1,8 +1,8 @@
-import { compose, createStore, applyMiddleware } from "redux";
+import logger from "redux-logger";
+import { compose, createStore, applyMiddleware, Middleware } from "redux";
 import { rootReducer } from "./root.reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import logger from "redux-logger";
 
 //EXAMPLE of middleWare
 // const loggerMiddleware = (store) => (next) => (action) => {
@@ -18,6 +18,14 @@ import logger from "redux-logger";
 //   //console.log("next state: ", store.getState());
 // };
 
+export type RootState = ReturnType<typeof rootReducer>;
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 const persistConfig = {
   key: "root",
   storage,
@@ -27,7 +35,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
-  Boolean
+  (middleWares): middleWares is Middleware => Boolean(middleWares)
 );
 
 const composeEnhancer =
