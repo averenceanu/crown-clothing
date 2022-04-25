@@ -8,6 +8,7 @@ import {
 import Button from "../button/button.component";
 import CartItem from "../cart-item/cart-item.component";
 import { selectCartItems } from "../../store/cart/cart.selector";
+import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 const CartDropDown = () => {
   const navigate = useNavigate();
@@ -26,7 +27,10 @@ const CartDropDown = () => {
           <EmptyMessage>Your card is empty</EmptyMessage>
         )}
       </CartItems>
-      <Button buttonType="inverted" onClick={goToCheckoutHandler}>
+      <Button
+        buttonType={BUTTON_TYPE_CLASSES.inverted}
+        onClick={goToCheckoutHandler}
+      >
         CHECKOUT
       </Button>
     </CartDropDownContainer>
